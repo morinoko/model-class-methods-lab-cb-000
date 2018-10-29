@@ -37,6 +37,6 @@ class Boat < ActiveRecord::Base
 
   def self.with_three_classifications
     joins(:classifications).group('boats.id').having("COUNT(*) = 3").select("boats.*")
-    # self.select { |boat| boat.classifications.count == 3 }
+    # self.select { |boat| boat.classifications.count == 3 } Will return an array, not ActiveRecord association
   end
 end
