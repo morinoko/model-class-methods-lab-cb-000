@@ -27,6 +27,10 @@ class Boat < ActiveRecord::Base
     joins(:classifications).where(classifications: {name: "Sailboat"})
   end
 
+  def self.non_sailboats
+    where.not('id IN (?)'), self.sailboats.pluck[:id])
+  end
+
   def self.with_three_classifications
     Boat.select { |boat| boat.classifications.count == 3 }
   end
