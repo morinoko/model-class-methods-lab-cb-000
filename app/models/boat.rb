@@ -3,6 +3,10 @@ class Boat < ActiveRecord::Base
   has_many    :boat_classifications
   has_many    :classifications, through: :boat_classifications
 
+  def self.longest
+    order(length: :desc).first
+  end
+
   def self.first_five
     limit(5)
   end
@@ -16,7 +20,7 @@ class Boat < ActiveRecord::Base
   end
 
   def self.last_three_alphabetically
-    limit(3).order(name: :desc)
+    order(name: :desc).limit(3)
   end
 
   def self.without_a_captain
@@ -27,7 +31,12 @@ class Boat < ActiveRecord::Base
     joins(:classifications).where(classifications: {name: "Sailboat"})
   end
 
+  def self.non_sailboats
+    where.not('id IN (?)', self.sailboats.pluck(:id))
+  end
+
   def self.with_three_classifications
-    Boat.select { |boat| boat.classifications.count == 3 }
+    joins(:classifications).group('boats.id').having("COUNT(*) = 3").select("boats.*")
+    # self.select { |boat| boat.classifications.count == 3 } Will return an array, not ActiveRecord association
   end
 end
