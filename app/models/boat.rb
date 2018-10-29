@@ -4,7 +4,7 @@ class Boat < ActiveRecord::Base
   has_many    :classifications, through: :boat_classifications
 
   def self.longest
-    order(length: :desc).limit(1)
+    order(length: :desc).first
   end
 
   def self.first_five
