@@ -3,6 +3,10 @@ class Boat < ActiveRecord::Base
   has_many    :boat_classifications
   has_many    :classifications, through: :boat_classifications
 
+  def self.longest
+    order(length: :desc).limit(1)
+  end
+  
   def self.first_five
     limit(5)
   end
