@@ -6,15 +6,7 @@ class Captain < ActiveRecord::Base
   end
 
   def self.sailors
-    #joins(boats: [:classifications]).where('classifications.name = ?', 'Sailboat').distinct
-    binding.pry
-    self.all.select do |captain|
-      captain.boats.each do |boat|
-        boat.classifications.each do |classification|
-          classification.name == "Sailboat"
-        end
-      end
-    end
+    joins(boats: [:classifications]).where('classifications.name = ?', 'Sailboat').distinct
   end
 
   def self.talented_seafarers
