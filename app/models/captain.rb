@@ -23,11 +23,7 @@ class Captain < ActiveRecord::Base
   end
 
   def self.talented_seafarers
-    joins(boats: [:classifications])
-    .where(classifications: {
-      name: ['Sailboat'],
-      name: ['Motorboat']
-    }).distinct
+    where('id IN (?)', self.sailors.pluck(:id) && self.motorboaters.pluck(:id))
   end
 
   def self.non_sailors
