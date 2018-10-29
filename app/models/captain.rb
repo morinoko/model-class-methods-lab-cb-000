@@ -3,14 +3,16 @@ class Captain < ActiveRecord::Base
 
   def self.catamaran_operators
     joins(boats: [:classifications])
-    .where(classifications: {name: 'Catamaran'})
-    .distinct
+    .where(classifications: {
+      name: 'Catamaran'
+    }).distinct
   end
 
   def self.sailors
     joins(boats: [:classifications])
-    .where(classifications: {name: 'Sailboat'})
-    .distinct
+    .where(classifications: {
+      name: 'Sailboat'
+    }).distinct
   end
 
   def self.talented_seafarers
