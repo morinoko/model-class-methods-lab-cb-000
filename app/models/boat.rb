@@ -5,6 +5,7 @@ class Boat < ActiveRecord::Base
 
   def self.longest
     order(length: :desc).first
+    binding.pry
   end
 
   def self.first_five
