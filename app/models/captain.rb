@@ -20,8 +20,7 @@ class Captain < ActiveRecord::Base
     .where(classifications: {
       name: ['Sailboat'],
       name: ['Motorboat']
-    }).distinct.to_sql
-    binding.pry
+    }).distinct
   end
 
   def self.non_sailors
