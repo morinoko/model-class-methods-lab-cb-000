@@ -32,7 +32,7 @@ class Boat < ActiveRecord::Base
   end
 
   def self.non_sailboats
-    where.not('id IN (?)', self.sailboats.pluck[:id])
+    where.not('id IN (?)', self.sailboats.pluck(:id)
   end
 
   def self.with_three_classifications
