@@ -36,6 +36,6 @@ class Boat < ActiveRecord::Base
   end
 
   def self.with_three_classifications
-    select { |boat| boat.classifications.count == 3 }
+    self.select { |boat| boat.classifications.count == 3 }
   end
 end
