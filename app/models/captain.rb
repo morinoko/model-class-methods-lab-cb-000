@@ -16,10 +16,10 @@ class Captain < ActiveRecord::Base
   end
 
   def self.talented_seafarers
-    joins(boats: [:classifications])
+    sql = joins(boats: [:classifications])
     .where(classifications: {
       name: ['Sailboat', 'Motorboat']
-    }).distinct
+    }).distinct.to_sql
   end
 
   def self.non_sailors
