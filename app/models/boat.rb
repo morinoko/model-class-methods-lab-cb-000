@@ -6,7 +6,7 @@ class Boat < ActiveRecord::Base
   def self.longest
     order(length: :desc).limit(1)
   end
-  
+
   def self.first_five
     limit(5)
   end
